@@ -413,6 +413,12 @@ html {
   font-size: 62.5%;
 }
 
+.container {
+  margin: 0 auto;
+  max-width: 110rem;
+  padding: 3rem 0;
+}
+
 @font-face {
   font-family: "Roboto";
   src: url("../fonts/Roboto-Regular.ttf");
@@ -443,24 +449,10 @@ html {
   color: #1a1a1a;
 }
 
-h2 {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-}
-
-h3 {
+h1 {
   font-family: "Roboto";
   font-weight: 400;
-  font-size: 3rem;
-}
-
-h5 {
-  font-family: "Roboto";
-  font-weight: 400;
-  font-size: 1.3rem;
+  font-size: 3.5rem;
 }
 
 p {
@@ -468,4 +460,60 @@ p {
   font-style: normal;
   font-weight: 400;
   font-size: 1.8rem;
+}
+p span {
+  font-weight: 600;
+}
+
+.tittle {
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.description-section {
+  max-width: 60%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.description-section__tittle {
+  margin-bottom: 3rem;
+}
+.description-section__inner {
+  margin-bottom: 3rem;
+}
+.description-section__btn {
+  width: 30rem;
+}
+
+.inner__text:not(:last-child) {
+  margin-bottom: 1rem;
+}
+.inner__img {
+  margin: 3rem 0;
+  background: url("../img/test1/description-img.png") center/contain no-repeat;
+  height: 600px;
+}
+
+.btn {
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  font-size: 1.7rem;
+  font-family: "Roboto";
+  font-weight: 400;
+  color: #000000;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.7rem;
+  border: 2px solid transparent;
+  background-color: #529aac;
+  transition: 0.3s all;
+}
+.btn:hover {
+  border-color: #92ddf0;
+}
+.btn:active {
+  filter: 0.2rem 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
 }
