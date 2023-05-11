@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="description-section">
+        <!-- <div class="description-section">
             <h1 class="description-section__tittle tittle">Закончи рисунок / 12 квадратов</h1>
 
             <div class="description-section__inner inner">
@@ -23,6 +23,49 @@
             </div>
             
             <button class="description-section__btn btn">Рисунок закончен</button>
+        </div> -->
+
+        <div class="question-section">
+            <h1 class="question-section__tittle tittle">Закончи рисунок / 12 квадратов</h1>
+            <div class="question-section__progress progress">
+                <button class="progress__btn btn btn_back">Назад</button>
+                <div class="progress__bar bar">
+                    <span data-progress="10%">10%</span>
+                </div>
+
+            </div>
+
+            <div class="question-section__inner inner">
+                <div class="inner__img img"></div>
+                <p class="inner__question question">Что нарисовано в этом квадрате?</p>
+
+                <div class="inner__options options">
+                    <div class="options__item item">
+                        <input type="radio" id="item_1" name="options">
+                        <label for="item_1">Солнце</label>
+                    </div>
+                    <div class="options__item item">
+                        <input type="radio" id="item_2" name="options">
+                        <label for="item_2">Цветок</label>
+                    </div>
+                    <div class="options__item item">
+                        <input type="radio" id="item_3" name="options">
+                        <label for="item_3">Глаз</label>
+                    </div>
+                    <div class="options__item item">
+                        <input type="radio" id="item_4" name="options">
+                        <label for="item_4">Смешная рожица, фигурка</label>
+                    </div>
+                    <div class="options__item item">
+                        <input type="radio" id="item_5" name="options">
+                        <label for="item_5">Гротескная карикатура</label>
+                    </div>
+                    <div class="options__item item">
+                        <input type="radio" id="item_6" name="options">
+                        <label for="item_6">Череп, взрыв, иной негатив</label>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- <div class="question-section">

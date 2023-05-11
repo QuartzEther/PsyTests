@@ -1,0 +1,39 @@
+$item-border-size: 2px
+
+.inner
+    &__text
+        &:not(:last-child)
+            margin-bottom: 1rem
+    &__question
+        text-align: center
+        font-size: 2rem
+    &__img
+        margin: 3rem 0
+
+.options
+    padding-top: 4rem
+    &__item
+        position: relative
+        padding: 1.2rem
+        border: $item-border-size #a3b6bd solid
+        border-radius: 1rem
+        transition: border .4s ease
+        &:not(:last-child)
+            margin-bottom: 1rem
+        &:has(> input:checked)
+            border: $item-border-size $color-border-dark solid
+
+
+        label
+            left: 0
+            font-family: "Roboto"
+            font-style: normal
+            font-weight: 400
+            font-size: 1.8rem
+        input
+            display: none
+
+
+        &:hover
+            border: $item-border-size $color-border-light solid
+        

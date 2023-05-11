@@ -1,0 +1,32 @@
+$progress-borderrad-small: .5rem
+$progress-borderrad-big: 3rem
+    
+.progress
+    width: 100%
+    display: flex
+    &__btn
+        width: 19%
+        border-radius: $progress-borderrad-big $progress-borderrad-small $progress-borderrad-small $progress-borderrad-big
+        margin-right: 1%
+
+    &__bar
+        border: $color-border-dark 2px solid
+        width: 80%
+        border-radius: $progress-borderrad-small $progress-borderrad-big $progress-borderrad-big $progress-borderrad-small
+        overflow: hidden
+        span
+            display: flex
+            align-items: center
+            justify-content: center
+            font-size: 1.7rem
+            font-family: "Roboto"
+            font-weight: 300
+            color: $color-white
+
+            width: 10%
+            height: 100%
+            background-color: $color-border-light
+
+
+
+
