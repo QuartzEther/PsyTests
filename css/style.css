@@ -505,6 +505,7 @@ p span {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  display: none;
 }
 .question-section__tittle {
   margin-bottom: 3rem;
