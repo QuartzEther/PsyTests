@@ -69,10 +69,10 @@ function init()
 {
     console.log("init")
 
-    addElement(data.questions[5], 'question');
+    addElement(data.questions[7], 'question', 1);
 }
 
-function addElement(sectionData, sectionType){
+function addElement(sectionData, sectionType, sectionProgress=0){
 
     let sectionStruct = [];
     let sectionText = [];
@@ -80,7 +80,7 @@ function addElement(sectionData, sectionType){
     let sectionAnswers = [];
 
     let sectionBtn = null;
-    let sectionProgress = null;
+
 
     //structure of section & init text and img
 
@@ -188,7 +188,10 @@ function addElement(sectionData, sectionType){
             temp = document.createElement('div');
 
             temp.classList.add("progress__bar");
-            temp.innerHTML = `<span data-progress="10%">10%</span>`
+            let progress = Math.ceil(sectionProgress/data.questions.length*100);
+            temp.innerHTML = `<span data-progress="${progress}%">
+                                    ${data.progressPercent?progress+"%":sectionProgress+" из "+data.questions.length}</span>`
+            temp.querySelector("span").style.width = progress+"%";
 
             section.insertBefore(temp, section.querySelector('.inner'));
 
