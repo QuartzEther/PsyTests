@@ -495,7 +495,6 @@ p span {
 }
 .description-section__inner .img {
   background: url("../img/test1/description.png") center/contain no-repeat;
-  height: 600px;
 }
 
 .question-section {
