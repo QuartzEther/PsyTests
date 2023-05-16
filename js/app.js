@@ -69,7 +69,7 @@ function init()
 {
     console.log("init")
 
-    addElement(data.description, 'description');
+    addElement(data.questions[5], 'question');
 }
 
 function addElement(sectionData, sectionType){
@@ -77,9 +77,12 @@ function addElement(sectionData, sectionType){
     let sectionStruct = [];
     let sectionText = [];
     let sectionImg = [];
-    let sectionBtn = null;
+    let sectionAnswers = [];
 
-    //structure of section & init
+    let sectionBtn = null;
+    let sectionProgress = null;
+
+    //structure of section & init text and img
 
     if (sectionData.text) sectionText = sectionData.text.split(/[|{}]/);
 
@@ -95,10 +98,23 @@ function addElement(sectionData, sectionType){
     }
     sectionText = sectionText.filter((n) => {return n != ""});
 
+    //init progress-bar answers
+    if (sectionData.answers){
+        sectionStruct.unshift("progress")
+
+        for (let ans of  sectionData.answers){
+            sectionAnswers.push([ans.text, ans.value])
+            sectionStruct.push('ans');
+        }
+    }
+
+    //init btn
     if (sectionData.btn){
         sectionBtn = sectionData.btn;
         sectionStruct.push('btn');
     }
+
+    console.log(sectionStruct);
 
     //-----------Create DOM section element-------------
 
@@ -115,6 +131,8 @@ function addElement(sectionData, sectionType){
     let inner = document.createElement('div');
     inner.classList.add('inner');
     section.append(inner);
+
+    let ansCounter = 0;
 
     for (let el of sectionStruct){
         if (el === 'text'){
@@ -138,6 +156,26 @@ function addElement(sectionData, sectionType){
 
             inner.append(temp);
 
+        }else if (el === 'ans'){
+
+            if (!inner.querySelector('.inner__option')){
+                temp = document.createElement('div');
+                temp.classList.add("inner__option", "options");
+
+                inner.append(temp);
+            }
+
+            temp = document.createElement('div');
+
+            let tempAns = sectionAnswers.shift();
+
+            temp.classList.add("options__item", "item");
+            temp.innerHTML = `<input type="radio" id="item_${ansCounter}" name="options" value="${tempAns[1]}">
+                        <label for="item_${ansCounter}">${tempAns[0]}</label>`
+
+            ansCounter++;
+            inner.querySelector('.inner__option').append(temp);
+
         }else if (el === 'btn'){
             temp = document.createElement('button');
 
@@ -145,6 +183,15 @@ function addElement(sectionData, sectionType){
             temp.innerHTML = sectionBtn;
 
             section.append(temp);
+
+        }else if (el === 'progress'){
+            temp = document.createElement('div');
+
+            temp.classList.add("progress__bar");
+            temp.innerHTML = `<span data-progress="10%">10%</span>`
+
+            section.insertBefore(temp, section.querySelector('.inner'));
+
         }
     }
 
@@ -157,6 +204,22 @@ function addElement(sectionData, sectionType){
 
         temp = section.querySelector('.btn');
         if (temp) temp.classList.add('description-section__btn')
+
+    }else if (sectionType == 'question'){
+        section.classList.add('question-section');
+        inner.classList.add('question-section__inner')
+
+        temp = section.querySelector('.tittle');
+        if (temp) temp.classList.add('question-section__tittle')
+
+        temp = section.querySelector('.progress__bar');
+        if (temp) temp.classList.add('question-section__progress__bar')
+
+        temp = section.querySelector('.text');
+        if (temp){
+            temp.classList.remove('inner__text', 'text');
+            temp.classList.add('inner__question', 'question');
+        }
     }
 }
 

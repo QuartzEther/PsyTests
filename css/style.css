@@ -504,7 +504,6 @@ p span {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  display: none;
 }
 .question-section__tittle {
   margin-bottom: 3rem;
@@ -584,20 +583,12 @@ p span {
   border: 2px #129dad solid;
 }
 
-.progress {
-  width: 100%;
-  display: flex;
-}
-.progress__btn {
-  width: 19%;
-  border-radius: 3rem 0.5rem 0.5rem 3rem;
-  margin-right: 1%;
-}
 .progress__bar {
   border: #107a86 2px solid;
-  width: 80%;
-  border-radius: 0.5rem 3rem 3rem 0.5rem;
+  width: 90%;
+  border-radius: 3rem;
   overflow: hidden;
+  height: 3rem;
 }
 .progress__bar span {
   display: flex;
@@ -607,7 +598,7 @@ p span {
   font-family: "Roboto";
   font-weight: 300;
   color: #ffffff;
-  width: 10%;
   height: 100%;
   background-color: #129dad;
+  width: 10%;
 }
