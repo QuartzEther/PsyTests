@@ -8,12 +8,12 @@ const container = document.querySelector('.container');
 
 //--------------Load Data & sources---------------
 function startPreloadChain(){
-    console.log('startPreloadChain');
+    //console.log('startPreloadChain');
     loadData();
 }
 
 function loadData(){
-    console.log('loadData');
+    //console.log('loadData');
 
     fetch('../data/test1.json')
         .then(response=>response.json())
@@ -27,7 +27,7 @@ function loadData(){
 }
 
 function onDataPreloaded(){
-    console.log('onDataPreloaded');
+    //console.log('onDataPreloaded');
 
     findPict(data);
     preloadPictures(data['srcImg'], imgArr, init);
@@ -67,15 +67,10 @@ function preloadPictures(path ,sources, callback) {
 //----------------------INIT------------------------
 function init()
 {
-    console.log("init")
+    //console.log("init")
     //addElement(data.questions[7], 'question', 1);
     let test = startTest(data);
-    console.log(test());
-    console.log(test());
-    console.log(test());
-    console.log(test());
-    console.log(test());
-    console.log(test());
+    test();
 }
 
 
@@ -84,12 +79,16 @@ function startTest(data){
     let sectArr = [];
     let sectionProgress = 0;
 
+    let resultArr = [];
+
     sectArr.push([data.description, "description"]);
     for (let section of data.questions){
         sectArr.push([section, "question"]);
     }
 
     function addElement(){
+
+        if (!sectArr[sectionProgress]) return;
 
         let sectionData = sectArr[sectionProgress][0];
         let sectionType = sectArr[sectionProgress][1];
@@ -133,8 +132,6 @@ function startTest(data){
             sectionBtn = sectionData.btn;
             sectionStruct.push('btn');
         }
-
-        console.log(sectionStruct);
 
         //-----------Create DOM section element-------------
 
@@ -228,7 +225,7 @@ function startTest(data){
             temp = section.querySelector('.btn');
             if (temp) temp.classList.add('description-section__btn')
 
-        }else if (sectionType == 'question'){
+        } else if (sectionType == 'question'){
             section.classList.add('question-section');
             inner.classList.add('question-section__inner')
 
@@ -245,14 +242,41 @@ function startTest(data){
             }
         }
 
+        //------------Listeners-------------
+        let buttons = [];
+
+        //заполнение
+        for (let btn of section.querySelectorAll('.btn'))
+            buttons.push(btn);
+        for (let btn of section.querySelectorAll('.item'))
+            buttons.push(btn);
+
+        //слушатель
+        function handler(e) {
+            if (this.querySelector("input")) resultArr.push(this.querySelector("input").value);
+
+            for (let btn of buttons){
+                btn.removeEventListener("click", handler);
+            }
+            
+            //Удаление секции
+            container.innerHTML = "";
+
+
+            addElement();
+        }
+
+        for (let btn of buttons){
+            btn.addEventListener("click", handler);
+        }
+
+
+        //----------------------------------
         return sectionProgress++;
     }
 
     return addElement;
 }
-
-
-
 
 //----------Get imgWidth-----------
 function getImgParam(src, param){
@@ -261,3 +285,4 @@ function getImgParam(src, param){
 
     return tempImg[param];
 }
+
