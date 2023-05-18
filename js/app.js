@@ -164,8 +164,14 @@ function startTest(data){
                             sectionStruct.push('text');
                         }
                         if (ans.values && typeof ans.values === "object"){
-                            sectionText.push(ans.values[resultArr.shift()])
-                            sectionStruct.push('text');
+
+                            let tempTxt = ans.values[resultArr.shift()].split(/[|]/);
+
+                            for (let i in tempTxt){
+                                sectionText.push(tempTxt[i])
+                                sectionStruct.push('text');
+                            }
+                            sectionText = sectionText.filter((n) => {return n != ""});
                         }
 
                     }
