@@ -68,9 +68,13 @@ function preloadPictures(path ,sources, callback) {
 function init()
 {
     //console.log("init")
-    //addElement(data.questions[7], 'question', 1);
-    let test = startTest(data);
-    test();
+
+    startTest(data);
+
+    //для замыкания
+    //let test = startTest(data);
+    //test();
+    //test();
 }
 
 
@@ -79,12 +83,16 @@ function startTest(data){
     let sectArr = [];
     let sectionProgress = 0;
 
-    let resultArr = [];
+    let resultArr = []; //массив со значениями
 
+
+    //список секций, для переключения
     sectArr.push([data.description, "description"]);
     for (let section of data.questions){
         sectArr.push([section, "question"]);
     }
+    sectArr.push([data.answer, "answer"]);
+
 
     function addElement(){
 
@@ -98,39 +106,72 @@ function startTest(data){
         let sectionImg = [];
         let sectionAnswers = [];
 
+        let sectionTittle = null;
         let sectionBtn = null;
 
 
         //structure of section & init text and img
 
-        if (sectionData.text) sectionText = sectionData.text.split(/[|{}]/);
+        //description & question
+        if (sectionType === "description" || sectionType === "question"){
 
-        for (let i in sectionText){
-            if (sectionText[i].includes('img')){
-                sectionStruct.push('img');
-                sectionImg.push(sectionData[sectionText[i]]);
-                sectionText[i] = "";
-            }else {
-                if (sectionText[i])
-                    sectionStruct.push('text');
+            //text split for txt&img
+            if (sectionData.text) sectionText = sectionData.text.split(/[|{}]/);
+
+            for (let i in sectionText){
+                if (sectionText[i].includes('img')){
+                    sectionStruct.push('img');
+                    sectionImg.push(sectionData[sectionText[i]]);
+                    sectionText[i] = "";
+                }else {
+                    if (sectionText[i])
+                        sectionStruct.push('text');
+                }
+            }
+            sectionText = sectionText.filter((n) => {return n != ""});
+
+            //init progress-bar answers
+            if (sectionData.answers){
+                sectionStruct.unshift("progress")
+
+                for (let ans of sectionData.answers){
+                    sectionAnswers.push([ans.text, ans.value])
+                    sectionStruct.push('ans');
+                }
+            }
+
+            //init btn
+            if (sectionData.btn){
+                sectionBtn = sectionData.btn;
+                sectionStruct.push('btn');
             }
         }
-        sectionText = sectionText.filter((n) => {return n != ""});
 
-        //init progress-bar answers
-        if (sectionData.answers){
-            sectionStruct.unshift("progress")
-
-            for (let ans of  sectionData.answers){
-                sectionAnswers.push([ans.text, ans.value])
-                sectionStruct.push('ans');
+        //answer
+        if (sectionType === "answer"){
+            if(sectionData.tittle){
+                sectionTittle = sectionData.tittle;
+                sectionStruct.push('tittle');
             }
-        }
+            if(sectionData.answers && typeof sectionData.answers === "object"){
 
-        //init btn
-        if (sectionData.btn){
-            sectionBtn = sectionData.btn;
-            sectionStruct.push('btn');
+                if(data.answerType === "AnsPerQuest"){
+
+                    for (let ans of sectionData.answers){
+                        sectionStruct.push('block');
+                        if (ans.tittle){
+                            sectionText.push(ans.tittle)
+                            sectionStruct.push('text');
+                        }
+                        if (ans.values && typeof ans.values === "object"){
+                            sectionText.push(ans.values[resultArr.shift()])
+                            sectionStruct.push('text');
+                        }
+
+                    }
+                }
+
+            }
         }
 
         //-----------Create DOM section element-------------
@@ -150,15 +191,23 @@ function startTest(data){
         section.append(inner);
 
         let ansCounter = 0;
+        let block = null;
 
         for (let el of sectionStruct){
-            if (el === 'text'){
+            if (el === 'block') {
+                block = document.createElement('div');
+                block.classList.add("inner__text-block");
+
+                inner.append(block);
+
+            }else if (el === 'text'){
+
                 temp = document.createElement('p');
 
                 temp.classList.add("inner__text", "text");
                 temp.innerHTML = sectionText.shift();
 
-                inner.append(temp);
+                block ? block.append(temp): inner.append(temp);
 
             }else if (el === 'img'){
 
@@ -212,6 +261,11 @@ function startTest(data){
 
                 section.insertBefore(temp, section.querySelector('.inner'));
 
+            }else if (el === 'tittle'){
+                let temp = document.createElement('h2');
+                temp.innerHTML = sectionTittle;
+                temp.classList.add('inner__tittle', 'tittle');
+                inner.append(temp);
             }
         }
 
@@ -240,7 +294,14 @@ function startTest(data){
                 temp.classList.remove('inner__text', 'text');
                 temp.classList.add('inner__question', 'question');
             }
+        } else if (sectionType == 'answer') {
+            section.classList.add('answer-section');
+            inner.classList.add('answer-section__inner')
+
+            temp = section.querySelector('.tittle');
+            if (temp) temp.classList.add('answer-section__tittle')
         }
+
 
         //------------Listeners-------------
         let buttons = [];
@@ -258,10 +319,8 @@ function startTest(data){
             for (let btn of buttons){
                 btn.removeEventListener("click", handler);
             }
-            
             //Удаление секции
             container.innerHTML = "";
-
 
             addElement();
         }
@@ -270,12 +329,12 @@ function startTest(data){
             btn.addEventListener("click", handler);
         }
 
-
         //----------------------------------
         return sectionProgress++;
     }
 
-    return addElement;
+    return addElement();
+    //return addElement; //для замыкания
 }
 
 //----------Get imgWidth-----------
