@@ -522,8 +522,8 @@ p span {
   background: url("../img/test1/question_1.png") center/contain no-repeat;
   height: 150px;
 }
-.question-section__progress {
-  margin-bottom: 2rem;
+.question-section__progress__bar {
+  margin-bottom: 3rem;
 }
 
 .answer-section {
@@ -549,7 +549,7 @@ p span {
   border: none;
   cursor: pointer;
   width: 25rem;
-  font-size: 1.7rem;
+  font-size: 2rem;
   font-family: "Roboto";
   font-weight: 300;
   color: #ffffff;
@@ -560,10 +560,18 @@ p span {
   transition: 0.3s all;
 }
 .btn:hover {
-  border-color: #92ddf0;
+  border-color: #02556a;
+  transform: scale(1.05, 1.1);
 }
 .btn:active {
   filter: 0.2rem 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
+}
+.btn:disabled {
+  background-color: #68858c;
+}
+.btn:disabled:hover {
+  border-color: rgba(255, 255, 255, 0);
+  transform: scale(1);
 }
 
 .inner__tittle {
@@ -584,7 +592,7 @@ p span {
 }
 .inner__question {
   text-align: center;
-  font-size: 2rem;
+  font-size: 3rem;
 }
 .inner__img {
   margin: 3rem 0;
@@ -598,13 +606,10 @@ p span {
   padding: 1.2rem;
   border: 2px #a3b6bd solid;
   border-radius: 1rem;
-  transition: border 0.4s ease;
+  transition: all 0.4s ease;
 }
 .options__item:not(:last-child) {
   margin-bottom: 1rem;
-}
-.options__item:has(> input:checked) {
-  border: 2px #107a86 solid;
 }
 .options__item label {
   left: 0;
@@ -618,6 +623,36 @@ p span {
 }
 .options__item:hover {
   border: 2px #129dad solid;
+}
+.options__item_big {
+  border: 2px #107a86 solid;
+  transform: scale(1.05);
+}
+.options__item_small {
+  transform: scale(0.95);
+}
+.options_img {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 3rem;
+}
+.options_img .options__item {
+  margin-bottom: 0;
+  transition: all 0.4s ease;
+}
+.options_img .options__item img {
+  width: 100%;
+}
+.options_img .options__item label {
+  display: inline-block;
+  height: 0;
+}
+.options_img .options__item_big {
+  transform: scale(1.3);
+}
+.options_img .options__item_small {
+  transform: scale(0.6);
 }
 
 .progress__bar {

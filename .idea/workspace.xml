@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6da2a609-8140-463a-8cfa-f22ecb47aa54" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test1.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/test1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/test_app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sass/components/_btn.sass" beforeDir="false" afterPath="$PROJECT_DIR$/sass/components/_btn.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sass/components/_inner.sass" beforeDir="false" afterPath="$PROJECT_DIR$/sass/components/_inner.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sass/components/_progress-bar.sass" beforeDir="false" afterPath="$PROJECT_DIR$/sass/components/_progress-bar.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sass/sections/_question-section.sass" beforeDir="false" afterPath="$PROJECT_DIR$/sass/sections/_question-section.sass" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2S5BcHC6o5VrMCOwrp6QHAdxMdF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6da2a609-8140-463a-8cfa-f22ecb47aa54" name="Changes" comment="" />
+      <created>1688426646650</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1688426646650</updated>
+      <workItem from="1688426651817" duration="25000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
