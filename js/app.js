@@ -248,9 +248,7 @@ function startTest(data){
                             }
                             continue;
                         }
-
-
-                        //-------------------------------------------------------------------------------------------------------------------
+                        
                         if (ans.type === "sam")
                             ansValues = Object.keys(ans.values).map(el => parseFloat(el)).sort((a, b) => a-b);
                         else if (ans.type === "male" || ans.type === "female")
