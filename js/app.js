@@ -215,21 +215,15 @@ function startTest(data){
 
                     //приводим к нормальному процентному соотношению если allResults > 0;
                     if (allResults){
-
                         result.sam /= allResults;
                         result.male /= allResults;
                         result.female /= allResults;
                         result.undef = typeof result.undef === "string" ? 'o' + parseFloat(result.undef.split('o')[1]) / allResults : result.undef / allResults;
-
-                        // console.log(`самость: ${(result.sam*100).toFixed(2)}%,
-                        // мужской (${result.male < 0 ? "-" : "+"}): ${Math.abs(result.male*100).toFixed(2)}%,
-                        // женский (${result.female < 0 ? "-" : "+"}): ${Math.abs(result.female*100).toFixed(2)}%,
-                        // тревога : ${(result.undef*100).toFixed(2)}%`);
                     }
 
                     console.log(result);
 
-                    //Вывод
+                    //поиск нужного и Вывод
                     for (let ans of sectionData.answers){
                         sectionStruct.push('block');
                         if (ans.tittle){
@@ -237,8 +231,26 @@ function startTest(data){
                             sectionStruct.push('text');
                         }
 
+
                         let ansValues = null;
 
+                        if (ans.type === "about"){
+                            let q = ["sam", "undef", "female", "male"];
+
+                            for (let i of q) {
+                                ansValues = Object.keys(ans.values[i]).map(el => parseFloat(el)).sort((a, b) => a-b);
+                                ansValues.push(1);
+
+                                let numV = typeof result[i] === "string" ? parseFloat(result[i].split('o')[1]) : null;
+                                ansValues = ansValues.filter((el,ind) => (numV ? numV : result[i]) >=  ansValues[ind] && (numV ? numV : result[i]) < ansValues[ind+1]);
+
+                                addAnsDOM(ans.values[i][ansValues[0]]);
+                            }
+                            continue;
+                        }
+
+
+                        //-------------------------------------------------------------------------------------------------------------------
                         if (ans.type === "sam")
                             ansValues = Object.keys(ans.values).map(el => parseFloat(el)).sort((a, b) => a-b);
                         else if (ans.type === "male" || ans.type === "female")
@@ -258,19 +270,20 @@ function startTest(data){
                                 else addAnsDOM(ans.values[result.gender][ansValues[i]]);
                                 break;
                             }
-
                         }
 
 
                         //добавить данные для создания блока в Dom
                         function addAnsDOM(value){
-                                let tempTxt = value.split(/[|]/);
+                            if (!value) return;
 
-                                for (let i in tempTxt){
-                                    sectionText.push(tempTxt[i])
-                                    sectionStruct.push('text');
-                                }
-                                sectionText = sectionText.filter((n) => {return n != ""});
+                            let tempTxt = value.split(/[|]/);
+
+                            for (let i in tempTxt){
+                                sectionText.push(tempTxt[i])
+                                sectionStruct.push('text');
+                            }
+                            sectionText = sectionText.filter((n) => {return n != ""});
                         }
 
                     }
